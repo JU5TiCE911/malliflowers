@@ -18,7 +18,7 @@ body {
     background: white;
     font-family: 'Times New Roman', Times, serif;
     font-weight: normal;
-    overflow-x: hidden; 
+    overflow-x: hidden;
 }
 
 /* --- HEADER --- */
@@ -223,25 +223,49 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-    .header { 
-        padding: 15px 20px;
-        flex-direction: column;
-        gap: 15px;
+    /* Фикс заголовка и букета */
+    .hero {
+        display: flex !important;
+        flex-direction: column !important; /* Текст сверху, букет снизу */
+        padding: 40px 20px !important;
+        height: auto !important;
+        min-height: 100px !important;
     }
-    
-    .header-left {
-        width: 100%;
-        justify-content: center;
+
+    .hero-text {
+        max-width: 100% !important;
+        text-align: center !important;
+    }
+
+    .hero-text h1 {
+        font-size: 28px !important;
+        line-height: 1.2 !important;
+    }
+
+    .hero-image {
+        position: static !important; /* Убирает наложение */
+        width: 100% !important;
+        max-width: 300px !important;
+        margin: 20px auto 0 !important;
+        display: block !important;
+    }
+
+    /* Фикс шапки */
+    .header {
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 15px !important;
     }
 
     .header-right-nav {
-        width: 100%;
-        justify-content: center;
-        margin: 0;
-        flex-wrap: wrap;
+        margin-top: 15px !important;
+        justify-content: center !important;
+        width: 100% !important;
+        flex-wrap: wrap !important;
     }
+}
 
-    .slogan { display: none; } 
+    .slogan { display: none; }
 
     .layout { flex-direction: column; }
     .sidebar { width: 100%; margin-bottom: 30px; }
@@ -260,11 +284,11 @@ body {
         margin-bottom: 20px;
     }
 
-    .hero-text h1 { 
-        font-size: 32px; 
+    .hero-text h1 {
+        font-size: 32px;
         line-height: 1.1;
     }
-    
+
     .hero-text p { margin-bottom: 20px; }
 
     .hero-image {
