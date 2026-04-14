@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flower Service - Мир Цветов</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --pink: #FF007A;
+        --light-pink: #FFF5F9;
+    }
+
+    body { font-family: 'Montserrat', sans-serif; margin: 0; }
+
+    /* Секция отзывов */
+    .reviews-section { padding: 60px 0; text-align: center; background: #fff; overflow: hidden; }
+
+    /* 1. Кнопка "Оставить отзыв" */
+    .btn-write-review {
+        background: var(--pink);
+        color: white;
+        padding: 18px 50px;
+        border-radius: 40px;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 700;
+        transition: 0.3s;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        box-shadow: 0 4px 15px rgba(255, 0, 122, 0.2);
+    }
+    .btn-write-review:hover { transform: scale(1.03); box-shadow: 0 6px 20px rgba(255, 0, 122, 0.4); }
+
+    /* 2. Заголовок */
+    .reviews-title {
+        font-weight: 900;
+        color: var(--pink);
+        font-size: clamp(24px, 5vw, 38px);
+        text-transform: uppercase;
+        margin-bottom: 40px;
+        letter-spacing: 1px;
+    }
+
+    /* 3. Карусель */
+    .carousel-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+    }
+    .carousel-track-container { width: 90%; overflow: hidden; padding: 20px 0; }
+    .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); gap: 25px; }
+
+    /* Карточка отзыва */
+    .review-card {
+        min-width: calc(33.333% - 17px);
+        background: white;
+        border-radius: 25px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        border: 1px solid #f0f0f0;
+        text-align: left;
+    }
+
+    .review-card-header {
+        background: var(--pink);
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+    }
+    .review-name { font-weight: 700; font-size: 14px; }
+    .review-date { font-size: 11px; opacity: 0.9; }
+
+    .review-body { padding: 20px; }
+    .review-stars { color: #FFD700; font-size: 20px; margin-bottom: 10px; }
+    .review-text { font-size: 14px; color: #444; line-height: 1.6; font-weight: 400; }
+
+    /* Стрелки */
+    .nav-arrow { background: none; border: none; cursor: pointer; padding: 10px; transition: 0.3s; }
+    .nav-arrow svg { width: 40px; height: 40px; fill: none; stroke: var(--pink); stroke-width: 3; }
+    .nav-arrow:hover { transform: scale(1.2); }
+
+    /* Модальное окно и Оверлей */
+    #review-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0); z-index: 9999; visibility: hidden;
+        backdrop-filter: blur(0px); transition: 0.5s; display: flex; align-items: center; justify-content: center;
+    }
+    #review-overlay.active { background: rgba(0, 0, 0, 0.7); visibility: visible; backdrop-filter: blur(8px); }
+
+    .modal-step {
+        background: white; width: 90%; max-width: 550px; border-radius: 35px;
+        padding: 50px; box-sizing: border-box; display: none; flex-direction: column; gap: 20px;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.3); transform: scale(0.8); transition: 0.3s;
+        text-align: center; position: relative;
+    }
+    .modal-step.active { display: flex; transform: scale(1); }
+
+    /* Кнопка Икс */
+    .close-modal-btn {
+        position: absolute; top: 20px; right: 25px;
+        font-size: 32px; color: var(--pink); cursor: pointer;
+        font-weight: bold; line-height: 1; transition: 0.3s;
+    }
+    .close-modal-btn:hover { transform: scale(1.2); }
+
+    .modal-step h2 { color: var(--pink); font-weight: 900; text-transform: uppercase; font-size: 24px; margin: 0; }
+
+    .modal-step input, .modal-step textarea {
+        background: #f9f9f9; border: 2px solid #eee; padding: 15px 20px;
+        border-radius: 15px; font-family: inherit; font-size: 16px; outline: none; transition: 0.3s;
+    }
+    .modal-step input:focus, .modal-step textarea:focus { border-color: var(--pink); background: white; }
+    .input-error { border-color: #ff4d4d !important; background: #fff1f1 !important; }
+
+    .modal-buttons { display: flex; gap: 10px; justify-content: center; width: 100%; }
+
+    .btn-next-step {
+        background: var(--pink); color: white; border: none; padding: 18px;
+        border-radius: 35px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 16px; flex: 2;
+    }
+    .btn-back-step {
+        background: #e0e0e0; color: #555; border: none; padding: 18px;
+        border-radius: 35px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 16px; flex: 1;
+    }
+
+    .star-selector { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
+    .star-selector span { font-size: 55px; color: #e0e0e0; cursor: pointer; transition: 0.2s; }
+    .star-selector span.hovered, .star-selector span.selected { color: #FFB800; transform: scale(1.1); }
+
+    @media (max-width: 900px) { .review-card { min-width: calc(50% - 13px); } }
+    @media (max-width: 600px) { .review-card { min-width: 100%; } .nav-arrow { display: none; } }
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <a href="index_ru.html"><img src="images/logo.png" class="logo"></a>
+    <div class="slogan">ПЕРВЫЙ ЦИФРОВОЙ ЦВЕТОЧНЫЙ МАГАЗИН В КАЗАХСТАНЕ</div>
+  </div>
+
+  <div class="header-right-nav">
+    <div class="lang-switch">
+        <a href="index.html" class="lang">КАЗ</a> /
+        <a href="index_ru.html" class="lang active">РУС</a>
+    </div>
+    <a href="catalog.html" class="nav-btn">КАТАЛОГ</a>
+    <a href="about.html" class="nav-btn">О КОМПАНИИ</a>
+    <div class="city-container">
+        <button type="button" class="nav-btn" id="cityBtn">ГОРОД</button>
+        <div class="city-dropdown" id="cityMenu">
+            <a href="#" class="city-link">Астана</a>
+            <a href="#" class="city-link">Алматы</a>
+        </div>
+    </div>
+    <a href="https://wa.me/77763354340" class="whatsapp-link">
+        <img src="images/whastapp.png" alt="" class="whatsapp-icon-img">
+    </a>
+  </div>
+</header>
+
+<section class="hero-wrapper">
+  <div class="hero">
+    <div class="hero-text">
+      <h1>
+        <span class="count">РАБОТАЕМ</span>
+        <span class="black">С</span>
+        <span class="pink">200+</span><br>
+        <span class="pink">ЦВЕТОЧНЫМИ</span><br>
+        <span class="black">МАГАЗИНАМИ</span>
+      </h1>
+      <p class="subtitle-text">НАЧНИТЕ СОБИРАТЬ СВОЙ БУКЕТ ПРЯМО СЕЙЧАС</p>
+      <a href="AI.html" style="text-decoration: none;">
+        <button class="main-btn">Собрать букет</button>
+      </a>
+    </div>
+    <img src="images/bouquet.png" class="hero-image">
+  </div>
+</section>
+
+<div class="info">
+  <div class="info-box">
+    <img src="images/phone.png">
+    <div>
+      <strong>РАБОТАЕМ 24/7</strong><br>
+        БЕЗ ПЕРЕРЫВОВ И ВЫХОДНЫХ
+    </div>
+  </div>
+</div>
+
+<section class="reviews-section">
+    <button class="btn-write-review" onclick="openReviewModal()">Оставить отзыв</button>
+    <h2 class="reviews-title">ОТЗЫВЫ ПОЛЬЗОВАТЕЛЕЙ</h2>
+
+    <div class="carousel-container">
+        <button class="nav-arrow" onclick="moveSlide(-1)">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="carousel-track-container">
+            <div class="carousel-track" id="reviewsTrack"></div>
+        </div>
+        <button class="nav-arrow" onclick="moveSlide(1)">
+            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+    </div>
+</section>
+
+<div id="review-overlay">
+    <div class="modal-step active" id="step1">
+        <div class="close-modal-btn" onclick="closeReviewModal()">×</div>
+        <h2>Представьтесь</h2>
+        <input type="text" id="revName" placeholder="Ваше имя">
+        <input type="text" id="revSurname" placeholder="Ваша фамилия">
+        <div class="modal-buttons">
+            <button class="btn-next-step" onclick="validateStep1()">Далее</button>
+        </div>
+    </div>
+
+    <div class="modal-step" id="step2">
+        <div class="close-modal-btn" onclick="closeReviewModal()">×</div>
+        <h2>Напишите отзыв</h2>
+        <textarea id="revText" placeholder="Вам всё понравилось?"></textarea>
+        <div class="modal-buttons">
+            <button class="btn-back-step" onclick="goToStep(1)">Назад</button>
+            <button class="btn-next-step" onclick="validateStep2()">Далее</button>
+        </div>
+    </div>
+
+    <div class="modal-step" id="step3">
+        <div class="close-modal-btn" onclick="closeReviewModal()">×</div>
+        <h2>Оцените нас</h2>
+        <div class="star-selector" id="starContainer">
+            <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
+        </div>
+        <p style="color: #999; font-size: 14px;">После выбора звезд отзыв будет опубликован</p>
+        <div class="modal-buttons">
+            <button class="btn-back-step" onclick="goToStep(2)">Назад</button>
+        </div>
+    </div>
+</div>
+
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3 class="footer-title">МИР ЦВЕТОВ</h3>
+            <p>Мы предлагаем вам самые свежие и красивые цветы. Каждый букет собран с любовью.</p>
+        </div>
+        <div class="footer-section">
+            <h3 class="footer-title">Ссылки</h3>
+            <ul class="footer-links">
+                <li><a href="index_ru.html">Главная</a></li>
+                <li><a href="about.html">О компании</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3 class="footer-title">Контакты</h3>
+            <ul class="footer-contact">
+                <li> г. Астана</li>
+                <li> +7 (776) 335-43-40</li>
+                <li> malika.iskak@bk.ru</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Мир цветов. Все права защищены.</p>
+    </div>
+</footer>
+
+<script>
+    let currentSlide = 0;
+    let selectedStars = 0;
+    // ОБЩИЙ КЛЮЧ ДЛЯ ОБОИХ ЯЗЫКОВ
+    const STORAGE_KEY = 'userReviews_shared';
+
+    const initialReviews = [
+        { name: "Арман", surname: "Ли", text: "Очень быстрая доставка! Цветы свежие, сервис на высоте.", stars: 5, date: "01.04.2026" },
+        { name: "Алина", surname: "", text: "AI-поиск просто супер, очень удобно выбирать букет.", stars: 5, date: "03.04.2026" },
+        { name: "Таир", surname: "", text: "Первый нормальный цифровой магазин цветов в КЗ. Рекомендую!", stars: 5, date: "07.04.2026" }
+    ];
+
+    if (!localStorage.getItem(STORAGE_KEY)) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(initialReviews));
+    }
+
+    function renderReviews() {
+        const track = document.getElementById('reviewsTrack');
+        const reviews = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        track.innerHTML = reviews.map(rev => `
+            <div class="review-card">
+                <div class="review-card-header">
+                    <span class="review-name">${rev.name} ${rev.surname}</span>
+                    <span class="review-date">${rev.date}</span>
+                </div>
+                <div class="review-body">
+                    <div class="review-stars">${'★'.repeat(rev.stars)}${'☆'.repeat(5-rev.stars)}</div>
+                    <div class="review-text">${rev.text}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function openReviewModal() { document.getElementById('review-overlay').classList.add('active'); }
+
+    function closeReviewModal() {
+        document.getElementById('review-overlay').classList.remove('active');
+        setTimeout(() => goToStep(1), 400);
+    }
+
+    function goToStep(step) {
+        document.querySelectorAll('.modal-step').forEach(el => el.classList.remove('active'));
+        document.getElementById('step' + step).classList.add('active');
+    }
+
+    function validateStep1() {
+        const name = document.getElementById('revName');
+        const surname = document.getElementById('revSurname');
+        let isValid = true;
+        if (!name.value.trim()) { name.classList.add('input-error'); isValid = false; }
+        else { name.classList.remove('input-error'); }
+        if (!surname.value.trim()) { surname.classList.add('input-error'); isValid = false; }
+        else { surname.classList.remove('input-error'); }
+        if (isValid) goToStep(2);
+    }
+
+    function validateStep2() {
+        const text = document.getElementById('revText');
+        if (!text.value.trim()) {
+            text.classList.add('input-error');
+        } else {
+            text.classList.remove('input-error');
+            goToStep(3);
+        }
+    }
+
+    const stars = document.querySelectorAll('#starContainer span');
+    stars.forEach((star, index) => {
+        star.onmouseover = () => stars.forEach((s, i) => i <= index ? s.classList.add('hovered') : s.classList.remove('hovered'));
+        star.onmouseout = () => stars.forEach(s => s.classList.remove('hovered'));
+        star.onclick = () => {
+            selectedStars = index + 1;
+            saveReview();
+        };
+    });
+
+    function saveReview() {
+        const name = document.getElementById('revName').value;
+        const surname = document.getElementById('revSurname').value;
+        const text = document.getElementById('revText').value;
+        const date = new Date().toLocaleDateString('ru-RU');
+
+        const reviews = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        reviews.unshift({ name, surname, text, stars: selectedStars, date });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews));
+
+        closeReviewModal();
+
+        setTimeout(() => {
+            document.getElementById('revName').value = '';
+            document.getElementById('revSurname').value = '';
+            document.getElementById('revText').value = '';
+            renderReviews();
+            currentSlide = 0;
+            updateSlider();
+        }, 500);
+    }
+
+    function updateSlider() {
+        const track = document.getElementById('reviewsTrack');
+        const cards = document.querySelectorAll('.review-card');
+        if (cards.length === 0) return;
+        const cardWidth = cards[0].offsetWidth + 25;
+        track.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+    }
+
+    function moveSlide(dir) {
+        const reviews = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        const maxSlides = Math.max(0, reviews.length - (window.innerWidth > 900 ? 3 : window.innerWidth > 600 ? 2 : 1));
+        currentSlide = Math.min(Math.max(currentSlide + dir, 0), maxSlides);
+        updateSlider();
+    }
+
+    window.addEventListener('load', () => {
+        renderReviews();
+        updateSlider();
+    });
+
+    // Город
+    const cityBtn = document.getElementById('cityBtn');
+    const cityMenu = document.getElementById('cityMenu');
+    cityBtn.onclick = (e) => {
+        e.stopPropagation();
+        cityMenu.classList.toggle('show-cities');
+    };
+    document.querySelectorAll('.city-link').forEach(link => {
+        link.onclick = function(e) {
+            e.preventDefault();
+            cityBtn.textContent = this.textContent;
+            cityMenu.classList.remove('show-cities');
+        };
+    });
+    document.onclick = () => cityMenu.classList.remove('show-cities');
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Компания жайлы - Flower Service</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+<header class="header">
+  <div class="header-left">
+    <a href="index.html"><img src="images/logo.png" class="logo"></a>
+    <div class="slogan">ПЕРВЫЙ ЦИФРОВОЙ ЦВЕТОЧНЫЙ МАГАЗИН В КАЗАХСТАНЕ</div>
+  </div>
+
+  <div class="header-right">
+    <div class="lang-switch">
+        <a href="about.html" class="lang active" style="text-decoration: none; color: inherit;">КАЗ</a>
+        <span>|</span>
+        <a href="about_ru.html" class="lang" style="text-decoration: none; color: inherit;">РУС</a>
+    </div>
+    <a href="index.html" class="nav-btn">НА ГЛАВНУЮ</a>
+  </div>
+</header>
+</header>
+
+<section class="about-content" style="padding: 10px 20px; max-width: 1000px; margin: 0 auto; font-family">
+
+
+   <main class="page-container">
+    <div class="about-intro-wrapper">
+        <div class="about-image-side">
+            <img src="images/WhatsApp Image 2026-02-24 at 19.19.05.jpeg" alt="Flower Service">
+            <p class="photo-caption">ИСКАК МАЛИКА</p>
+        </div>
+
+        <div class="about-text-side">
+            <h1 class="about-main-title">О КОМПАНИИ</h1>
+            <div class="about-description">
+                <p><strong>Flower Service</strong> - это первый цифровизированный цветочный магазин в Казахстане. Мы объединили современные технологии и традиции дарения цветов.</p>
+                <p>Наша цель - обеспечить вам самую свежую доставку цветов быстро и удобно. Мы сотрудничаем с более чем 200 цветочными магазинами, что позволяет выбрать качественный букет в любое время.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr style="border: 0; height: 1px; background: #eee; margin: 40px 0;">
+
+    <div class="about-text">
+    <h2 class="pink">НАША ИСТОРИЯ</h2>
+    <p>История Flower Service началась с идеи поднять цветочную индустрию Казахстана на новый уровень. Мы - первый проект в стране, сочетающий традиционную культуру дарения цветов с современными цифровыми технологиями.</p>
+
+    <h2 class="pink">НАША МИССИЯ</h2>
+    <p>Наша миссия - сближать людей, несмотря на расстояния, и приносить радость в каждый дом. Мы стремимся сделать процесс выбора цветов максимально простым, быстрым и современным.</p>
+
+    <h2 class="pink">НАШИ ПРЕИМУЩЕСТВА</h2>
+    <ul><li>200+ партнерских магазинов
+
+Полная цифровизация и удобный заказ
+
+24/7 непрерывная работа
+
+Гарантия быстрой доставки</li> <li>Полная цифровизация и удобный заказ</li>
+    </ul>
+</div>
+</main>
+    <footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3 class="footer-title">МИР ЦВЕТОВ</h3>
+            <p>Мы предлагаем вам самые свежие и красивые цветы. Каждый букет собран с любовью.</p>
+        </div>
+
+        <div class="footer-section">
+            <h3 class="footer-title">Ссылки</h3>
+            <ul class="footer-links">
+                <li><a href="index_ru.html">Главная страница</a></li>
+                <li><a href="about_ru.html">О компании</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="#">Доставка</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3 class="footer-title">Контакты</h3>
+            <ul class="footer-contact">
+                <li>город Астана</li>
+                <li>+7 (776) 335-43-40</li>
+                <li>malika.iskak@bk.ru</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Мир цветов. Все права защищены.</p>
+    </div>
+</footer>
+
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('cityBtn');
+    const menu = document.getElementById('cityMenu');
+    const links = document.querySelectorAll('.city-link');
+
+    if (btn && menu) {
+        // Открытие/закрытие
+        btn.onclick = function(e) {
+            e.stopPropagation(); // Останавливаем всплытие
+            menu.classList.toggle('show-cities');
+            console.log("Меню переключено");
+        };
+
+        // Выбор города
+        links.forEach(link => {
+            link.onclick = function(e) {
+                e.preventDefault();
+                btn.textContent = this.textContent;
+                menu.classList.remove('show-cities');
+                console.log("Город выбран: " + this.textContent);
+            };
+        });
+
+        // Клик мимо — закрыть
+        document.onclick = function(e) {
+            if (!btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('show-cities');
+            }
+        };
+    } else {
+        console.error("Кнопка или меню не найдены в HTML! Проверь ID.");
+    }
+});
+</script>
+
+</body>
+</html>

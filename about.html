@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Компания жайлы - Flower Service</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+<header class="header">
+  <div class="header-left">
+    <a href="index.html"><img src="images/logo.png" class="logo"></a>
+    <div class="slogan">ҚАЗАҚСТАНДАҒЫ ЕҢ АЛҒАШҚЫ ЦИФРЛАНДЫРЫЛҒАН ГҮЛ ДҮКЕНІ</div>
+  </div>
+
+  <div class="header-right">
+    <div class="lang-switch">
+        <a href="about.html" class="lang active" style="text-decoration: none; color: inherit;">КАЗ</a>
+        <span>|</span>
+        <a href="about_ru.html" class="lang" style="text-decoration: none; color: inherit;">РУС</a>
+    </div>
+    <a href="index.html" class="nav-btn">БАСТЫ БЕТКЕ</a>
+  </div>
+</header>
+</header>
+
+<section class="about-content" style="padding: 10px 20px; max-width: 1000px; margin: 0 auto; font-family">
+
+
+   <main class="page-container">
+    <div class="about-intro-wrapper">
+
+        <div class="about-image-side">
+            <img src="images/WhatsApp Image 2026-02-24 at 19.19.05.jpeg" alt="Flower Service">
+            <p class="photo-caption">ИСКАК МАЛИКА</p>
+        </div>
+
+        <div class="about-text-side">
+            <h1 class="about-main-title">КОМПАНИЯ ЖАЙЛЫ</h1>
+
+            <div class="about-description">
+                <p><strong>Flower Service</strong> - бұл Қазақстандағы ең алғашқы цифрландырылған гүл дүкені. Біз заманауи технологиялар мен гүл сыйлау дәстүрін біріктірдік.</p>
+                <p>Біздің мақсатымыз - сізге ең балғын гүлдерді тез әрі ыңғайлы жеткізу. Біз 200-ден астам гүл дүкендерімен серіктеспіз, бұл кез келген уақытта сапалы букет таңдауға мүмкіндік береді.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="about-bottom-content">
+        </div>
+</main>
+    <div style="line-height: 1.6; font-size: 20px; color: #333;">
+
+        <hr style="border: 0; height: 1px; background: #eee; margin: 40px 0;">
+
+        <div class="about-text">
+    <h2 class="pink">БІЗДІҢ ТАРИХЫМЫЗ</h2>
+    <p>
+        Flower Service тарихы Қазақстандағы гүл индустриясын жаңа деңгейге көтеру идеясынан басталды.
+        Біз дәстүрлі гүл сыйлау мәдениетін заманауи цифрлық технологиялармен ұштастырған еліміздегі ең алғашқы жобамыз.
+    </p>
+
+    <h2 class="pink">МИССИЯМЫЗ</h2>
+    <p>
+        Біздің миссиямыз - арақашықтыққа қарамастан, адамдарды бір-біріне жақындату және әрбір үйге қуаныш сыйлау.
+        Біз гүл таңдау процесін барынша оңай, жылдам және заманауи етуге тырысамыз.
+    </p>
+
+    <h2 class="pink">АРТЫҚШЫЛЫҚТАРЫМЫЗ</h2>
+    <ul style="list-style: none; padding-left: 0;">
+        <li> 200+ серіктес дүкендер</li>
+        <li> Толық цифрландыру және ыңғайлы тапсырыс</li>
+        <li> 24/7 үздіксіз жұмыс</li>
+        <li> Жылдам жеткізу кепілдігі</li>
+    </ul>
+</div>
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3 class="footer-title">ГҮЛДЕР ӘЛЕМІ</h3>
+            <p>Біз сіздерге ең балғын және әдемі гүлдерді ұсынамыз. Әрбір букет махаббатпен жиналған.</p>
+        </div>
+
+        <div class="footer-section">
+            <h3 class="footer-title">Сілтемелер</h3>
+            <ul class="footer-links">
+                <li><a href="index.html">Басты бет</a></li>
+                <li><a href="about.html">Компания жайлы</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="#">Жеткізу</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3 class="footer-title">Байланыс</h3>
+            <ul class="footer-contact">
+                <li>Астана қаласы</li>
+                <li>+7 (776) 335-43-40</li>
+                <li>malika.iskak@bk.ru</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Гүлдер әлемі. Барлық құқықтар қорғалған.</p>
+    </div>
+</footer>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('cityBtn');
+    const menu = document.getElementById('cityMenu');
+    const links = document.querySelectorAll('.city-link');
+
+    if (btn && menu) {
+        // Открытие/закрытие
+        btn.onclick = function(e) {
+            e.stopPropagation(); // Останавливаем всплытие
+            menu.classList.toggle('show-cities');
+            console.log("Меню переключено");
+        };
+
+        // Выбор города
+        links.forEach(link => {
+            link.onclick = function(e) {
+                e.preventDefault();
+                btn.textContent = this.textContent;
+                menu.classList.remove('show-cities');
+                console.log("Город выбран: " + this.textContent);
+            };
+        });
+
+        // Клик мимо — закрыть
+        document.onclick = function(e) {
+            if (!btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('show-cities');
+            }
+        };
+    } else {
+        console.error("Кнопка или меню не найдены в HTML! Проверь ID.");
+    }
+});
+</script>
+</body>
+</html>
