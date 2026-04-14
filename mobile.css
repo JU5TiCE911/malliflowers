@@ -18,7 +18,7 @@ body {
     background: white;
     font-family: 'Times New Roman', Times, serif;
     font-weight: normal;
-    overflow-x: hidden; /* Защита от горизонтальной прокрутки */
+    overflow-x: hidden; 
 }
 
 /* --- HEADER --- */
@@ -223,29 +223,58 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-    .header { padding: 15px 20px; }
-    .slogan { display: none; } /* Скрываем слоган для экономии места */
+    .header { 
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .header-left {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .header-right-nav {
+        width: 100%;
+        justify-content: center;
+        margin: 0;
+        flex-wrap: wrap;
+    }
+
+    .slogan { display: none; } 
 
     .layout { flex-direction: column; }
     .sidebar { width: 100%; margin-bottom: 30px; }
 
     .hero {
         padding: 40px 20px;
-        min-height: 450px;
+        min-height: auto;
         border-radius: 30px;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
+        text-align: center;
     }
 
-    .hero-text h1 { font-size: 36px; text-align: center; }
-    .hero-text p { text-align: center; }
+    .hero-text {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .hero-text h1 { 
+        font-size: 32px; 
+        line-height: 1.1;
+    }
+    
+    .hero-text p { margin-bottom: 20px; }
+
     .hero-image {
         position: relative;
         width: 100%;
-        max-width: 400px;
+        max-width: 320px;
         right: 0;
         bottom: 0;
-        margin-top: 20px;
+        margin: 20px auto 0;
+        display: block;
     }
 
     .footer-container {
@@ -256,33 +285,25 @@ body {
 }
 
 @media screen and (max-width: 480px) {
-    .header {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .header-right-nav {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
+    .nav-btn, .city-btn {
+        padding: 6px 12px;
+        font-size: 12px;
     }
 
     .products-grid {
-        grid-template-columns: 1fr; /* Одна колонка на узких экранах */
+        grid-template-columns: 1fr;
         padding: 0 10px;
     }
 
     .catalog-header h1 {
         font-size: 18px;
         padding: 10px 20px;
+        width: 95%;
     }
 
     .main-btn {
         width: 100%;
         padding: 15px 20px;
-    }
-
-    .review-card {
-        width: 100%;
+        font-size: 16px;
     }
 }
