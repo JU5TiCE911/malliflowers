@@ -1,3 +1,4 @@
+@media screen and (max-width: 768px) {
 @font-face {
     font-family: 'Benzin';
     src: url('fonts/benzin-semibold.otf') format('opentype');
@@ -329,5 +330,9 @@ body {
         width: 100%;
         padding: 15px 20px;
         font-size: 16px;
+    }
+}
+    .button {
+        width: 100%;
     }
 }
