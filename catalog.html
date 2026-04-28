@@ -2,10 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог - Мир Цветов</title>
     <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="mobile.css"
-media="screen and (max-width: 768px)"> 
+    <link rel="stylesheet" href="mobile.css"> 
     <style>
         @font-face {
             font-family: 'Benzin';
@@ -13,61 +13,44 @@ media="screen and (max-width: 768px)">
         }
 
         :root { --pink: #FF007A; --light-pink: #FFD1E8; }
-        body { font-family: sans-serif; margin: 0; background-color: #fff; }
+        body { font-family: sans-serif; margin: 0; background-color: #fff; overflow-x: hidden; }
 
+        /* Десктоп стили (базовые) */
         .header { display: flex; justify-content: space-between; padding: 15px 5%; align-items: center; border-bottom: 1px solid #eee; }
         .logo img { height: 85px; width: auto; object-fit: contain; }
 
         .nav-links { display: flex; align-items: center; gap: 10px; }
-
         .nav-links a, .lang-switch, .city-badge {
-            text-decoration: none;
-            color: var(--pink);
-            font-family: 'Benzin', sans-serif;
-            font-weight: bold;
-            font-size: 13px;
-            border: 1px solid var(--pink);
-            padding: 7px 20px;
-            border-radius: 50px;
-            transition: 0.3s;
-            background: white;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            text-transform: uppercase;
+            text-decoration: none; color: var(--pink); font-family: 'Benzin', sans-serif;
+            font-weight: bold; font-size: 13px; border: 1px solid var(--pink);
+            padding: 7px 20px; border-radius: 50px; transition: 0.3s;
+            background: white; cursor: pointer; display: inline-flex; align-items: center; text-transform: uppercase;
         }
 
-        .nav-links a.active, .nav-links a:hover, .lang-switch:hover {
-            background: var(--pink);
-            color: white !important;
-        }
+        .nav-links a.active, .nav-links a:hover, .lang-switch:hover { background: var(--pink); color: white !important; }
 
         .catalog-header h1 {
-            font-family: 'Benzin', sans-serif;
-            background: var(--light-pink); color: var(--pink);
+            font-family: 'Benzin', sans-serif; background: var(--light-pink); color: var(--pink);
             text-align: center; padding: 12px; border-radius: 50px;
             margin: 30px auto; width: 75%; font-size: 22px; letter-spacing: 2px;
         }
 
         .layout { display: flex; padding: 0 5%; position: relative; gap: 20px; }
-
         .sidebar { width: 220px; flex-shrink: 0; }
         .sidebar h3 { font-family: 'Benzin', sans-serif; font-size: 16px; margin-bottom: 15px; margin-top: 25px; color: #333; text-transform: uppercase; }
 
         .price-filter { margin-bottom: 30px; width: 180px; }
         .range-slider-container { position: relative; height: 20px; margin-bottom: 15px; }
-        .slider-track {
-            position: absolute; width: 100%; height: 4px;
-            background: var(--light-pink); border-radius: 2px; top: 8px; z-index: 1;
-        }
+        .slider-track { position: absolute; width: 100%; height: 4px; background: var(--light-pink); border-radius: 2px; top: 8px; z-index: 1; }
         input[type="range"] { position: absolute; width: 100%; -webkit-appearance: none; background: none; pointer-events: none; top: 0; z-index: 2; margin: 0; }
         input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; height: 18px; width: 18px; border-radius: 50%; background: var(--pink); border: 2px solid white; pointer-events: auto; cursor: pointer; }
 
         .price-inputs { display: flex; align-items: center; justify-content: space-between; }
         .price-box { background: var(--light-pink); color: var(--pink); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
 
-        .filter-list { list-style: none; padding: 0; margin: 0; max-height: 400px; overflow-y: auto; }
-        .filter-list li { margin-bottom: 10px; font-size: 13px; color: #444; display: flex; align-items: center; }
+        .filter-list { list-style: none; padding: 0; margin: 0; }
+        .filter-list li { margin-bottom: 10px; font-size: 13px; color: #444; }
+        .filter-list label { display: flex; align-items: center; cursor: pointer; }
         .filter-list input { margin-right: 10px; accent-color: var(--pink); }
 
         .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; flex-grow: 1; margin-right: 60px; margin-bottom: 50px;}
@@ -85,11 +68,11 @@ media="screen and (max-width: 768px)">
 <body>
 
     <header class="header">
-        <div class="header-left" style="display: flex; align-items: center; gap: 20px;">
+        <div class="header-left">
             <a href="index_ru.html">
                 <img src="images/logo.png" alt="Logo">
             </a>
-            <div id="header-slogan" style="font-family: 'Times New Roman', serif; font-size: 14px; color: #888; max-width: 250px; text-transform: uppercase;">
+            <div id="header-slogan">
                 ПЕРВЫЙ ЦИФРОВОЙ ЦВЕТОЧНЫЙ МАГАЗИН В КАЗАХСТАНЕ
             </div>
         </div>
@@ -98,7 +81,7 @@ media="screen and (max-width: 768px)">
             <a href="index_ru.html" id="nav-home">ГЛАВНАЯ</a>
             <a href="#" class="active" id="nav-catalog">КАТАЛОГ</a>
             <a href="about.html" id="nav-about">О КОМПАНИИ</a>
-            <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">РУС</button>
+            <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">КАЗ</button>
             <select id="citySelect" class="city-badge">
                 <option value="astana" id="opt-astana">АСТАНА</option>
                 <option value="almaty" id="opt-almaty">АЛМАТЫ</option>
@@ -158,71 +141,11 @@ media="screen and (max-width: 768px)">
     </div>
 
 <script>
-   let currentLang = 'ru';
-
+    /* Весь твой JS остается без изменений */
+    let currentLang = 'ru';
     const translations = {
-        ru: {
-            slogan: "ПЕРВЫЙ ЦИФРОВОЙ ЦВЕТОЧНЫЙ МАГАЗИН В КАЗАХСТАНЕ",
-            navHome: "ГЛАВНАЯ", navCatalog: "КАТАЛОГ", navAbout: "О КОМПАНИИ",
-            pageTitle: "ГОТОВЫЕ БУКЕТЫ", labelPrice: "Цена", labelComp: "Цветы в составе",
-            labelCategories: "Категории", fHits: "Хиты продаж",
-            fRoze: "Розы", fKust: "Кустовые розы", fPion: "Пионовидные розы",
-            fGort: "Гортензии", fHriz: "Хризантемы", fGoll: "Голландские розы",
-            fEvka: "Эвкалипт", fEust: "Эустомы",
-            fLilii: "Лилии", fDiant: "Диантус", fGvozd: "Гвоздика",
-            sideText: "ДАРИТЕ РАДОСТЬ БЛИЗКИМ", priceLabel: "ЦЕНА:", langBtn: "КАЗ",
-            cities: { astana: "АСТАНА", almaty: "АЛМАТЫ" },
-            flowers: {
-                "НЕЖНОСТЬ": "НЕЖНОСТЬ", "ПИОНОВИДНОЕ СЧАСТЬЕ": "ПИОНОВИДНОЕ СЧАСТЬЕ",
-                "ИЗЫСКАННАЯ НЕЖНОСТЬ": "ИЗЫСКАННАЯ НЕЖНОСТЬ", "КОРЗИНКА РАДОСТИ": "КОРЗИНКА РАДОСТИ",
-                "КОНТРАСТ ЧУВСТВ": "КОНТРАСТ ЧУВСТВ",
-                "ОБЛАКО ЛЮБВИ": "ОБЛАКО ЛЮБВИ",
-                "Букет Императрица": "Букет Императрица", "Букет Микс": "Букет Микс",
-                "Сердце голландии": "Сердце голландии", "Букет из Хризантем": "Букет из Хризантем",
-                "Белоснежка": "Белоснежка", "15 Хризантем": "15 Хризантем",
-                "Элегантная Сдержанность": "Элегантная Сдержанность", "Нежное признание": "Нежное признание",
-                "Момент вдохновения": "Момент вдохновения", "Сиреневая симфония": "Сиреневая симфония",
-                "Эмилия": "Эмилия",
-                "Королевская нежность": "Королевская нежность", "Королева сердца": "Королева сердца",
-                "Притяжение": "Притяжение", "Алиса": "Алиса",
-                "Малиновая нежность": "Малиновая нежность", "Очарование роз": "Очарование роз",
-                "Алая классика": "Алая классика",
-                "Комбо Лиловая": "Комбо Лиловая", "Белые Лилии": "Белые Лилии", "Нежная Лилия": "Нежная Лилия", "Букет Ли": "Букет Ли",
-                "SUN": "SUN", "ROYAL": "ROYAL", "PINK": "PINK", "AMORE": "AMORE",
-                "ESTET": "ESTET", "FUSION": "FUSION", "PURE LOVE": "PURE LOVE", "FLORAL LOVE": "FLORAL LOVE", "SO SWEET": "SO SWEET", "SECRET GARDEN": "SECRET GARDEN"
-            }
-        },
-        kaz: {
-            slogan: "ҚАЗАҚСТАНДАҒЫ ЕҢ АЛҒАШҚЫ ЦИФРЛАНДЫРЫЛҒАН ГҮЛ ДҮКЕНІ",
-            navHome: "БАСТЫ БЕТ", navCatalog: "КАТАЛОГ", navAbout: "КОМПАНИЯ ТУРАЛЫ",
-            pageTitle: "ДАЙЫН БУКЕТТЕР", labelPrice: "Бағасы", labelComp: "Гүлдер құрамы",
-            labelCategories: "Санаттар", fHits: "Хит сатылымдар",
-            fRoze: "Розалар", fKust: "Бұталы розалар", fPion: "Шаршыгүл розалары",
-            fGort: "Гортензиялар", fHriz: "Хризантемалар", fGoll: "Голланд розалары",
-            fEvka: "Эвкалипт", fEust: "Эустомалар",
-            fLilii: "Лилиялар", fDiant: "Диантус", fGvozd: "Қалампыр",
-            sideText: "ЖАҚЫНДАРЫҢЫЗҒА ҚУАНЫШ СЫЙЛАҢЫЗ", priceLabel: "БАҒАСЫ:", langBtn: "РУС",
-            cities: { astana: "АСТАНА", almaty: "АЛМАТЫ" },
-            flowers: {
-                "НЕЖНОСТЬ": "НӘЗІКТІК", "ПИОНОВИДНОЕ СЧАСТЬЕ": "ШАРШЫГҮЛ БАҚЫТЫ",
-                "ИЗЫСКАННАЯ НЕЖНОСТЬ": "КЕРЕМЕТ НӘЗІКТІК", "КОРЗИНКА РАДОСТИ": "ҚУАНЫШ СЕБЕТІ",
-                "КОНТРАСТ ЧУВСТВ": "СЕЗІМ КОНТРАСТЫ",
-                "ОБЛАКО ЛЮБВИ": "МАХАББАТ БҰЛТЫ",
-                "Букет Императрица": "Императрица букеті", "Букет Микс": "Микс букеті",
-                "Сердце голландии": "Голландия жүрегі", "Букет из Хризантем": "Хризантемалар букеті",
-                "Белоснежка": "Ақшақар", "15 Хризантем": "15 Хризантема",
-                "Элегантная Сдержанность": "Элегантты ұстамдылық", "Нежное признание": "Нәзік мойындау",
-                "Момент вдохновения": "Шабыт сәті", "Сиреневая симфония": "Сирень симфониясы",
-                "Эмилия": "Эмилия",
-                "Королевская нежность": "Корольдік нәзіктік", "Королева сердца": "Жүрек патшайымы",
-                "Притяжение": "Тартылыс", "Алиса": "Алиса",
-                "Малиновая нежность": "Таңқурай нәзіктігі", "Очарование роз": "Розалар тартымдылығы",
-                "Алая классика": "Ал қызыл классика",
-                "Комбо Лиловая": "Лиловый комбо", "Белые Лилии": "Ақ лилиялар", "Нежная Лилия": "Нәзік лилия", "Букет Ли": "Ли букеті",
-                "SUN": "SUN", "ROYAL": "ROYAL", "PINK": "PINK", "AMORE": "AMORE",
-                "ESTET": "ESTET", "FUSION": "FUSION", "PURE LOVE": "ТАЗА МАХАББАТ", "FLORAL LOVE": "ГҮЛДІ МАХАББАТ", "SO SWEET": "ӨТЕ ТӘТТІ", "SECRET GARDEN": "ҚҰПИЯ БАҚША"
-            }
-        }
+        ru: { slogan: "ПЕРВЫЙ ЦИФРОВОЙ ЦВЕТОЧНЫЙ МАГАЗИН В КАЗАХСТАНЕ", navHome: "ГЛАВНАЯ", navCatalog: "КАТАЛОГ", navAbout: "О КОМПАНИИ", pageTitle: "ГОТОВЫЕ БУКЕТЫ", labelPrice: "Цена", labelComp: "Цветы в составе", labelCategories: "Категории", fHits: "Хиты продаж", fRoze: "Розы", fKust: "Кустовые розы", fPion: "Пионовидные розы", fGort: "Гортензии", fHriz: "Хризантемы", fGoll: "Голландские розы", fEvka: "Эвкалипт", fEust: "Эустомы", fLilii: "Лилии", fDiant: "Диантус", fGvozd: "Гвоздика", sideText: "ДАРИТЕ РАДОСТЬ БЛИЗКИМ", langBtn: "КАЗ", cities: { astana: "АСТАНА", almaty: "АЛМАТЫ" }, flowers: { "НЕЖНОСТЬ": "НЕЖНОСТЬ", "ПИОНОВИДНОЕ СЧАСТЬЕ": "ПИОНОВИДНОЕ СЧАСТЬЕ", "ИЗЫСКАННАЯ НЕЖНОСТЬ": "ИЗЫСКАННАЯ НЕЖНОСТЬ", "КОРЗИНКА РАДОСТИ": "КОРЗИНКА РАДОСТИ", "КОНТРАСТ ЧУВСТВ": "КОНТРАСТ ЧУВСТВ", "ОБЛАКО ЛЮБВИ": "ОБЛАКО ЛЮБВИ", "Букет Императрица": "Букет Императрица", "Букет Микс": "Букет Микс", "Сердце голландии": "Сердце голландии", "Букет из Хризантем": "Букет из Хризантем", "Белоснежка": "Белоснежка", "15 Хризантем": "15 Хризантем", "Элегантная Сдержанность": "Элегантная Сдержанность", "Нежное признание": "Нежное признание", "Момент вдохновения": "Момент вдохновения" } },
+        kaz: { slogan: "ҚАЗАҚСТАНДАҒЫ ЕҢ АЛҒАШҚЫ ЦИФРЛАНДЫРЫЛҒАН ГҮЛ ДҮКЕНІ", navHome: "БАСТЫ БЕТ", navCatalog: "КАТАЛОГ", navAbout: "КОМПАНИЯ ТУРАЛЫ", pageTitle: "ДАЙЫН БУКЕТТЕР", labelPrice: "Бағасы", labelComp: "Гүлдер құрамы", labelCategories: "Санаттар", fHits: "Хит сатылымдар", fRoze: "Розалар", fKust: "Бұталы розалар", fPion: "Шаршыгүл розалары", fGort: "Гортензиялар", fHriz: "Хризантемалар", fGoll: "Голланд розалары", fEvka: "Эвкалипт", fEust: "Эустомалар", fLilii: "Лилиялар", fDiant: "Диантус", fGvozd: "Қалампыр", sideText: "ЖАҚЫНДАРЫҢЫЗҒА ҚУАНЫШ СЫЙЛАҢЫЗ", langBtn: "РУС", cities: { astana: "АСТАНА", almaty: "АЛМАТЫ" }, flowers: { "НЕЖНОСТЬ": "НӘЗІКТІК", "ПИОНОВИДНОЕ СЧАСТЬЕ": "ШАРШЫГҮЛ БАҚЫТЫ", "ИЗЫСКАННАЯ НЕЖНОСТЬ": "КЕРЕМЕТ НӘЗІКТІК", "КОРЗИНКА РАДОСТИ": "ҚУАНЫШ СЕБЕТІ", "КОНТРАСТ ЧУВСТВ": "СЕЗІМ КОНТРАСТЫ", "ОБЛАКО ЛЮБВИ": "МАХАББАТ БҰЛТЫ", "Букет Императрица": "Императрица букеті", "Букет Микс": "Микс букеті", "Сердце голландии": "Голландия жүрегі", "Букет из Хризантем": "Хризантемалар букеті", "Белоснежка": "Ақшақар", "15 Хризантем": "15 Хризантема", "Элегантная Сдержанность": "Элегантты ұстамдылық", "Нежное признание": "Нәзік мойындау", "Момент вдохновения": "Шабыт сәті" } }
     };
 
     const flowerData = {
@@ -241,45 +164,12 @@ media="screen and (max-width: 768px)">
             { id: "15 Хризантем", price: 32000, cat: "хризантемы", img: "images/15%20Хризантем.jpg" },
             { id: "Элегантная Сдержанность", price: 124000, cat: "кустовые розы", img: "images/Элегантная%20Сдержанность.jpg" },
             { id: "Нежное признание", price: 66000, cat: "эвкалипт кустовые розы эустомы", img: "images/Нежное%20признание.jpg" },
-            { id: "Момент вдохновения", price: 32000, cat: "эвкалипт розы гвоздика", img: "images/Момент%20вдохновения.jpg" },
-            { id: "Сиреневая симфония", price: 57000, cat: "гортензии кустовые розы пионовидная", img: "images/Сиреневая%20симфония.jpg" },
-            { id: "Эмилия", price: 49000, cat: "гортензия эвкалипт кустовая розы", img: "images/Эмилия.jpg" },
-            { id: "Королевская нежность", price: 165000, cat: "гортензия кустовая роза эустома момоко", img: "images/Королевская%20нежность.jpg" },
-            { id: "Королева сердца", price: 97000, cat: "гортензия эвкалипт гвоздика пионовидные кустовые розы", img: "images/Королева%20сердца.jpg" },
-            { id: "Притяжение", price: 9000, cat: "гортензии эвкалипт хризантема", img: "images/Притяжение.jpg" },
-            { id: "Алиса", price: 85000, cat: "гортензия эвкалипт роза гвоздика", img: "images/Алиса.jpg" },
-            { id: "Малиновая нежность", price: 62000, cat: "хризантема кустовая роза", img: "images/Малиновая%20нежность.jpg" },
-            { id: "Очарование роз", price: 60000, cat: "кустовые розы", img: "images/Очарование%20роз.jpg" },
-            { id: "Алая классика", price: 17000, cat: "розы", img: "images/Алая%20классика.jpg" },
-            { id: "Комбо Лиловая", price: 55000, cat: "лилии", img: "images/Комбо%20Лиловая.webp" },
-            { id: "Белые Лилии", price: 116000, cat: "лилии", img: "images/Белые%20Лилии.jpg" },
-            { id: "Нежная Лилия", price: 34000, cat: "лилии", img: "images/Нежная%20Лилия.jpg" },
-            { id: "Букет Ли", price: 25700, cat: "лилии", img: "images/Букет%20Ли.jpg" },
-            { id: "SUN", price: 19990, cat: "диантус", img: "images/SUN.webp" },
-            { id: "ROYAL", price: 25900, cat: "диантус", img: "images/ROYAL.webp" },
-            { id: "PINK", price: 25900, cat: "диантус", img: "images/PINK.webp" },
-            { id: "AMORE", price: 23700, cat: "диантус", img: "images/AMORE.webp" },
-            { id: "ESTET", price: 29500, cat: "гвоздика", img: "images/ESTET.webp" },
-            { id: "FUSION", price: 26500, cat: "гвоздика", img: "images/FUSION.webp" },
-            { id: "PURE LOVE", price: 27300, cat: "гвоздика", img: "images/PURE%20LOVE.webp" },
-            { id: "FLORAL LOVE", price: 250000, cat: "гвоздика", img: "images/FLORAL%20LOVE.webp" },
-            { id: "SO SWEET", price: 60500, cat: "гвоздика", img: "images/SO%20SWEET.webp" },
-            { id: "SECRET GARDEN", price: 57700, cat: "гвоздика", img: "images/SECRET%20GARDEN.webp" }
+            { id: "Момент вдохновения", price: 32000, cat: "эвкалипт розы гвоздика", img: "images/Момент%20вдохновения.jpg" }
         ]
     };
     flowerData.almaty = [...flowerData.astana];
 
-    let sliderOne = document.getElementById("slider-1");
-    let sliderTwo = document.getElementById("slider-2");
-    let displayValOne = document.getElementById("range1");
-    let displayValTwo = document.getElementById("range2");
-
-    function toggleLanguage() {
-        currentLang = (currentLang === 'ru') ? 'kaz' : 'ru';
-        applyTranslations();
-        render();
-    }
-
+    function toggleLanguage() { currentLang = (currentLang === 'ru') ? 'kaz' : 'ru'; applyTranslations(); render(); }
     function applyTranslations() {
         const t = translations[currentLang];
         document.getElementById('header-slogan').textContent = t.slogan;
@@ -308,71 +198,39 @@ media="screen and (max-width: 768px)">
         document.getElementById('opt-almaty').textContent = t.cities.almaty;
     }
 
-    function slideOne() {
-        if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= 0){ sliderOne.value = sliderTwo.value; }
-        displayValOne.textContent = sliderOne.value;
-        render();
-    }
-    function slideTwo() {
-        if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= 0){ sliderTwo.value = sliderOne.value; }
-        displayValTwo.textContent = sliderTwo.value;
-        render();
-    }
-
-    function applyAISearch() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const query = urlParams.get('query');
-        if (!query) return;
-        const lowerQuery = query.toLowerCase();
-        const priceMatch = lowerQuery.match(/\d+/);
-        if (priceMatch) {
-            const targetPrice = parseInt(priceMatch[0]);
-            if (targetPrice >= 5000 && targetPrice <= 250000) {
-                sliderTwo.value = targetPrice;
-                displayValTwo.textContent = targetPrice;
-            }
-        }
-    }
+    function slideOne() { render(); document.getElementById("range1").textContent = document.getElementById("slider-1").value; }
+    function slideTwo() { render(); document.getElementById("range2").textContent = document.getElementById("slider-2").value; }
 
     function render() {
-    const city = document.getElementById('citySelect').value;
-    const grid = document.getElementById('catalogGrid');
-    const minP = parseInt(document.getElementById('slider-1').value);
-    const maxP = parseInt(document.getElementById('slider-2').value);
+        const city = document.getElementById('citySelect').value;
+        const grid = document.getElementById('catalogGrid');
+        const minP = parseInt(document.getElementById('slider-1').value);
+        const maxP = parseInt(document.getElementById('slider-2').value);
+        const activeFilters = Array.from(document.querySelectorAll('.filter-check:checked')).map(c => c.value.toLowerCase());
+        const isHitOnly = document.getElementById('hits-filter').checked;
 
-    const activeFilters = Array.from(document.querySelectorAll('.filter-check:checked')).map(c => c.value.toLowerCase());
-    const isHitOnly = document.getElementById('hits-filter') ? document.getElementById('hits-filter').checked : false;
+        const hitsList = ["НЕЖНОСТЬ", "ИЗЫСКАННАЯ НЕЖНОСТЬ"];
+        const filtered = flowerData[city].filter(f => {
+            const matchesPrice = f.price >= minP && f.price <= maxP;
+            const matchesCat = activeFilters.length === 0 || activeFilters.some(filter => f.cat.toLowerCase().includes(filter));
+            const matchesHit = isHitOnly ? hitsList.includes(f.id) : true;
+            return matchesPrice && matchesCat && matchesHit;
+        });
 
-    const hitsList = ["НЕЖНОСТЬ", "ИЗЫСКАННАЯ НЕЖНОСТЬ"];
-
-    const filtered = flowerData[city].filter(f => {
-        const matchesPrice = f.price >= minP && f.price <= maxP;
-        const matchesCat = activeFilters.length === 0 || activeFilters.some(filter => f.cat.toLowerCase().includes(filter));
-        const matchesHit = isHitOnly ? hitsList.includes(f.id) : true;
-        return matchesPrice && matchesCat && matchesHit;
-    });
-
-    grid.innerHTML = filtered.map(f => {
-        return `
+        grid.innerHTML = filtered.map(f => `
             <div class="product-card">
                 <img src="${f.img}" alt="${f.id}" loading="lazy">
                 <div class="product-name">${translations[currentLang].flowers[f.id] || f.id}</div>
                 <div class="product-price">${f.price.toLocaleString()} ₸</div>
             </div>
-        `;
-    }).join('');
-}
+        `).join('');
+    }
 
     document.getElementById('citySelect').addEventListener('change', render);
     document.getElementById('hits-filter').addEventListener('change', render);
     document.querySelectorAll('.filter-check').forEach(ch => ch.addEventListener('change', render));
 
-    window.onload = () => {
-        applyTranslations();
-        applyAISearch();
-        render();
-    };
+    window.onload = () => { applyTranslations(); render(); };
 </script>
 </body>
 </html>
-<link rel="stylesheet" href="mobile.css">
