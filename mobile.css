@@ -1,222 +1,124 @@
-/* --- ГЛОБАЛЬНЫЕ СТИЛИ (БАЗА) --- */
-@font-face {
-    font-family: 'Benzin';
-    src: url('fonts/benzin-semibold.otf') format('opentype');
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    --pink: #FF007A;
-    --light-pink: #FFD1E8;
-}
-
-body {
-    background: white;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: normal;
-    overflow-x: hidden;
-}
-
-/* --- ШАПКА (DESKTOP) --- */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 5%;
-    background: white;
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.logo {
-    height: 60px;
-    width: auto;
-}
-
-.slogan {
-    font-size: 14px;
-    color: #888;
-    max-width: 250px;
-    line-height: 1.2;
-    text-transform: uppercase;
-}
-
-.header-right-nav {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-/* --- КНОПКИ И ТИПОГРАФИКА --- */
-.nav-btn, .main-btn, .city-btn, .hero-text h1, .catalog-header h1, .product-card h3 {
-    font-family: 'Benzin', sans-serif !important;
-}
-
-.nav-btn, .city-btn {
-    background: #ffffff;
-    border: 1px solid var(--pink);
-    color: var(--pink);
-    padding: 8px 20px;
-    border-radius: 1000px;
-    cursor: pointer;
-    transition: 0.3s ease;
-    white-space: nowrap;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.nav-btn:hover, .city-btn:hover {
-    background: var(--pink);
-    color: white;
-}
-
-/* --- ГЕРОЙ БЛОК (БАННЕР) --- */
-.hero-wrapper { padding: 0 20px; }
-.hero {
-    max-width: 1600px;
-    min-height: 500px;
-    margin: 20px auto;
-    background: #ffd6e4;
-    border-radius: 40px;
-    padding: 60px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-text { position: relative; z-index: 2; max-width: 600px; }
-.hero-text h1 { font-size: 60px; line-height: 1; margin-bottom: 20px; }
-
-.hero-image {
-    width: 600px;
-    position: absolute;
-    right: -50px;
-    bottom: -50px;
-    z-index: 1;
-}
-
-/* --- КАТАЛОГ --- */
-.catalog-header h1 {
-    background-color: var(--light-pink);
-    color: var(--pink);
-    padding: 15px;
-    border-radius: 40px;
-    font-size: 24px;
-    margin: 30px auto;
-    text-align: center;
-    max-width: 90%;
-}
-
-.layout {
-    display: flex;
-    padding: 0 5%;
-    gap: 30px;
-}
-
-.sidebar { width: 200px; flex-shrink: 0; }
-
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    flex-grow: 1;
-}
-
-.product-card { text-decoration: none; color: inherit; text-align: center; }
-.product-card img {
-    width: 100%;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    border-radius: 20px;
-    margin-bottom: 10px;
-}
-
-/* --- МОБИЛЬНАЯ АДАПТАЦИЯ (ГЛАВНЫЕ ИСПРАВЛЕНИЯ ТУТ) --- */
+/* --- МОБИЛЬНАЯ АДАПТАЦИЯ (ИСПРАВЛЕННАЯ ВЕРСИЯ) --- */
 @media screen and (max-width: 768px) {
     
-    /* Исправляем шапку: Лого и слоган сверху, кнопки снизу */
+    /* 1. Шапка: Логотип и слоган в один ряд */
     .header {
         flex-direction: column;
         align-items: flex-start;
-        padding: 15px 20px;
-        gap: 15px;
-    }
-
-    .header-left {
-        width: 100%;
+        padding: 10px 15px;
         gap: 10px;
     }
 
-    .logo { height: 45px; }
-
-    .slogan {
-        font-size: 10px;
-        max-width: 160px;
-    }
-
-    /* Кнопки выстраиваем в ровный ряд */
-    .header-right-nav {
+    .header-left {
+        display: flex !important;
+        flex-direction: row !important; /* Лого и текст всегда рядом */
+        align-items: center;
         width: 100%;
-        justify-content: flex-start;
-        flex-wrap: wrap; /* Если не влезут, перенесутся */
-        gap: 8px;
+        gap: 12px;
     }
 
-    .nav-btn, .city-btn {
-        padding: 6px 12px;
-        font-size: 11px;
+    .logo img {
+        height: 45px !important;
+        width: auto;
     }
 
-    /* Увеличиваем товары: теперь 2 в ряд */
-    .layout { flex-direction: column; }
-    .sidebar { width: 100%; margin-bottom: 20px; }
-
-    .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+    #header-slogan {
+        font-size: 9px !important; /* Уменьшаем, чтобы влезло рядом с лого */
+        max-width: 180px !important;
+        line-height: 1.2;
+        color: #888;
+        text-transform: uppercase;
+        display: block !important;
     }
 
-    /* Масштабируем баннер */
-    .hero {
-        padding: 30px 20px;
-        min-height: auto;
+    /* 2. Навигация: Кнопки и "О компании" */
+    .nav-links {
+        width: 100% !important;
+        display: flex !important;
+        flex-wrap: wrap;
+        gap: 6px !important;
+        margin-top: 5px;
+    }
+
+    .nav-links a, .lang-switch, .city-badge {
+        padding: 6px 10px !important;
+        font-size: 10px !important; /* Уменьшаем шрифт, чтобы текст был в одну строку */
+        white-space: nowrap !important; /* Запрещаем перенос слов в кнопке */
+        border-radius: 20px;
+        height: auto;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    /* 3. Боковое меню: Увеличиваем фильтры */
+    .layout {
         flex-direction: column;
-        text-align: center;
+        padding: 0 15px;
     }
 
-    .hero-text h1 { font-size: 32px; }
-    
-    .hero-image {
-        position: static;
+    .sidebar {
         width: 100%;
-        max-width: 280px;
-        margin-top: 20px;
+        margin-bottom: 30px;
+        background: #fdfdfd;
+        padding: 15px;
+        border-radius: 15px;
+        border: 1px solid #f0f0f0;
     }
 
-    .catalog-header h1 {
-        font-size: 18px;
-        padding: 10px;
+    .sidebar h3 {
+        font-size: 18px !important; /* Заголовки крупнее */
+        margin-bottom: 15px !important;
     }
-}
 
-/* Совсем маленькие экраны */
-@media screen and (max-width: 480px) {
-    .header-right-nav {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Кнопки по 2 в ряд */
+    .filter-list li {
+        margin-bottom: 18px !important; /* Больше отступа между пунктами */
     }
-    
+
+    .filter-list label {
+        font-size: 16px !important; /* Текст фильтров крупнее для клика */
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .filter-list input[type="checkbox"] {
+        width: 22px !important; /* Сами чекбоксы больше */
+        height: 22px !important;
+        margin-right: 12px !important;
+    }
+
+    /* Ползунок цены */
+    .price-filter {
+        width: 100% !important;
+        margin-bottom: 40px !important;
+    }
+
+    /* 4. Каталог: 2 колонки и крупные фото */
     .products-grid {
-        grid-template-columns: repeat(2, 1fr); /* Оставляем 2 в ряд, чтобы не было мелко */
+        grid-template-columns: repeat(2, 1fr) !important; /* Строго 2 колонки */
+        gap: 15px !important;
+        margin-right: 0 !important;
+        width: 100%;
+    }
+
+    .product-card img {
+        border-radius: 15px !important;
+    }
+
+    .product-name {
+        font-size: 12px !important;
+        margin-top: 10px;
+        min-height: 35px;
+        line-height: 1.2;
+    }
+
+    .product-price {
+        font-size: 14px !important;
+        margin-bottom: 10px;
+    }
+
+    /* Скрываем боковой баннер на мобилках, чтобы не мешал */
+    .side-banner {
+        display: none !important;
     }
 }
