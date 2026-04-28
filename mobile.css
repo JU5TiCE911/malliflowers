@@ -220,3 +220,95 @@ body {
         grid-template-columns: repeat(2, 1fr); /* Оставляем 2 в ряд, чтобы не было мелко */
     }
 }
+/* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Шапка: Логотип и слоган рядом */
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .header-left {
+        display: flex !important;
+        flex-direction: row !important; /* Принудительно ставим в ряд */
+        align-items: center;
+        width: 100%;
+        gap: 15px !important;
+    }
+
+    .logo img { 
+        height: 50px !important; /* Размер логотипа для мобилок */
+    }
+
+    #header-slogan {
+        font-size: 10px !important;
+        max-width: 160px !important;
+        line-height: 1.2;
+        text-align: left;
+    }
+
+    /* 2. Кнопки навигации ("О КОМПАНИИ" в одну строку) */
+    .nav-links {
+        flex-wrap: wrap; /* Разрешаем перенос кнопок, если не влазят */
+        justify-content: flex-start;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .nav-links a, .lang-switch, .city-badge {
+        font-size: 11px !important; /* Делаем текст чуть меньше для мобильных */
+        padding: 6px 12px !important;
+        white-space: nowrap !important; /* ЗАПРЕЩАЕМ перенос слов на две строки */
+    }
+
+    /* 3. Фильтры (Увеличиваем размер для удобства нажатия пальцем) */
+    .layout { 
+        flex-direction: column; /* Фильтры сверху, товары снизу */
+        padding: 0 15px;
+        gap: 10px;
+    }
+
+    .sidebar { 
+        width: 100% !important; 
+        margin-bottom: 20px; 
+    }
+
+    .sidebar h3 {
+        font-size: 18px !important; /* Крупный заголовок фильтров */
+    }
+
+    .filter-list li {
+        font-size: 16px !important; /* Увеличиваем текст фильтров */
+        padding: 8px 0; /* Добавляем пространство вокруг для удобного тапа */
+        margin-bottom: 5px;
+    }
+
+    .filter-list input[type="checkbox"] {
+        width: 24px; /* Увеличиваем сам чекбокс */
+        height: 24px;
+        margin-right: 15px;
+    }
+
+    /* 4. Товары: 2 колонки и увеличенный размер */
+    .products-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important; /* Строго 2 колонки */
+        gap: 15px !important;
+        margin-right: 0 !important; /* Убираем лишний отступ */
+        margin-bottom: 50px;
+        width: 100%;
+    }
+
+    .product-name {
+        font-size: 12px !important;
+        min-height: 40px !important;
+    }
+
+    /* Скрываем боковой баннер на мобильных, чтобы не ломал дизайн */
+    .side-banner {
+        display: none !important;
+    }
+}
