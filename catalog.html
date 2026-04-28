@@ -1,223 +1,222 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Каталог - Мир Цветов</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="mobile.css"> 
-    <style>
-        @font-face {
-            font-family: 'Benzin';
-            src: url('fonts/benzin-semibold.otf') format('opentype');
-        }
-        :root { --pink: #FF007A; --light-pink: #FFD1E8; }
-        body { font-family: sans-serif; margin: 0; background-color: #fff; overflow-x: hidden; }
+/* --- ГЛОБАЛЬНЫЕ СТИЛИ (БАЗА) --- */
+@font-face {
+    font-family: 'Benzin';
+    src: url('fonts/benzin-semibold.otf') format('opentype');
+}
 
-        /* Базовые стили шапки */
-        .header { display: flex; justify-content: space-between; padding: 15px 5%; align-items: center; border-bottom: 1px solid #eee; }
-        .header-left { display: flex; align-items: center; gap: 20px; }
-        .logo img { height: 85px; width: auto; }
-        #header-slogan { font-family: 'Benzin', sans-serif; font-size: 11px; color: #333; max-width: 250px; line-height: 1.4; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .nav-links { display: flex; align-items: center; gap: 10px; }
-        .nav-links a, .lang-switch, .city-badge {
-            text-decoration: none; color: var(--pink); font-family: 'Benzin', sans-serif;
-            font-weight: bold; font-size: 13px; border: 1px solid var(--pink);
-            padding: 7px 20px; border-radius: 50px; transition: 0.3s;
-            background: white; cursor: pointer; display: inline-flex; align-items: center; text-transform: uppercase;
-        }
-        .nav-links a.active, .nav-links a:hover { background: var(--pink); color: white !important; }
+:root {
+    --pink: #FF007A;
+    --light-pink: #FFD1E8;
+}
 
-        .catalog-header h1 {
-            font-family: 'Benzin', sans-serif; background: var(--light-pink); color: var(--pink);
-            text-align: center; padding: 12px; border-radius: 50px;
-            margin: 30px auto; width: 75%; font-size: 22px; letter-spacing: 2px;
-        }
+body {
+    background: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: normal;
+    overflow-x: hidden;
+}
 
-        .layout { display: flex; padding: 0 5%; position: relative; gap: 20px; }
-        .sidebar { width: 220px; flex-shrink: 0; }
-        .sidebar h3 { font-family: 'Benzin', sans-serif; font-size: 16px; margin: 25px 0 15px 0; color: #333; text-transform: uppercase; }
+/* --- ШАПКА (DESKTOP) --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: white;
+}
 
-        .price-filter { margin-bottom: 30px; width: 180px; }
-        .range-slider-container { position: relative; height: 20px; margin-bottom: 15px; }
-        .slider-track { position: absolute; width: 100%; height: 4px; background: var(--light-pink); border-radius: 2px; top: 8px; z-index: 1; }
-        input[type="range"] { position: absolute; width: 100%; -webkit-appearance: none; background: none; pointer-events: none; top: 0; z-index: 2; margin: 0; }
-        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; height: 18px; width: 18px; border-radius: 50%; background: var(--pink); border: 2px solid white; pointer-events: auto; cursor: pointer; }
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
 
-        .price-inputs { display: flex; align-items: center; justify-content: space-between; }
-        .price-box { background: var(--light-pink); color: var(--pink); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+.logo {
+    height: 60px;
+    width: auto;
+}
 
-        .filter-list { list-style: none; padding: 0; margin: 0; }
-        .filter-list li { margin-bottom: 10px; font-size: 13px; color: #444; }
-        .filter-list label { display: flex; align-items: center; cursor: pointer; }
-        .filter-list input { margin-right: 10px; accent-color: var(--pink); }
+.slogan {
+    font-size: 14px;
+    color: #888;
+    max-width: 250px;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
 
-        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; flex-grow: 1; margin-right: 60px; margin-bottom: 50px; }
-        .product-card { text-decoration: none; color: inherit; text-align: center; display: block; }
-        .product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 15px; background: #f5f5f5; transition: 0.3s; }
-        .product-name { font-family: 'Benzin', sans-serif; font-size: 13px; font-weight: bold; margin-top: 15px; color: #333; min-height: 32px; display: flex; align-items: center; justify-content: center; }
-        .product-price { font-size: 15px; color: var(--pink); margin-top: 5px; font-weight: bold; }
+.header-right-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
-        .side-banner { position: absolute; right: 0; top: 0; background: var(--pink); color: white; width: 50px; height: 100%; border-radius: 25px 0 0 25px; display: flex; align-items: center; justify-content: center; }
-        .side-banner span { font-family: 'Benzin', sans-serif; writing-mode: vertical-rl; transform: rotate(180deg); font-weight: bold; font-size: 14px; white-space: nowrap; letter-spacing: 1px; }
-    </style>
-</head>
-<body>
+/* --- КНОПКИ И ТИПОГРАФИКА --- */
+.nav-btn, .main-btn, .city-btn, .hero-text h1, .catalog-header h1, .product-card h3 {
+    font-family: 'Benzin', sans-serif !important;
+}
 
-    <header class="header">
-        <div class="header-left">
-            <a href="index_ru.html"><img src="images/logo.png" alt="Logo"></a>
-            <div id="header-slogan">ПЕРВЫЙ ЦИФРОВОЙ ЦВЕТОЧНЫЙ МАГАЗИН В КАЗАХСТАНЕ</div>
-        </div>
-        <div class="nav-links">
-            <a href="index_ru.html" id="nav-home">ГЛАВНАЯ</a>
-            <a href="#" class="active" id="nav-catalog">КАТАЛОГ</a>
-            <a href="about.html" id="nav-about">О КОМПАНИИ</a>
-            <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">КАЗ</button>
-            <select id="citySelect" class="city-badge">
-                <option value="astana" id="opt-astana">АСТАНА</option>
-                <option value="almaty" id="opt-almaty">АЛМАТЫ</option>
-            </select>
-        </div>
-    </header>
+.nav-btn, .city-btn {
+    background: #ffffff;
+    border: 1px solid var(--pink);
+    color: var(--pink);
+    padding: 8px 20px;
+    border-radius: 1000px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    white-space: nowrap;
+    text-decoration: none;
+    font-size: 14px;
+}
 
-    <div class="catalog-header"><h1 id="page-title">ГОТОВЫЕ БУКЕТЫ</h1></div>
+.nav-btn:hover, .city-btn:hover {
+    background: var(--pink);
+    color: white;
+}
 
-    <div class="layout">
-        <aside class="sidebar">
-            <h3 id="label-price">Цена</h3>
-            <div class="price-filter">
-                <div class="range-slider-container">
-                    <div class="slider-track"></div>
-                    <input type="range" min="5000" max="250000" value="5000" id="slider-1" oninput="slideOne()">
-                    <input type="range" min="5000" max="250000" value="250000" id="slider-2" oninput="slideTwo()">
-                </div>
-                <div class="price-inputs">
-                    <span class="price-box" id="range1">5000</span>
-                    <span style="color: #999">—</span>
-                    <span class="price-box" id="range2">250000</span>
-                </div>
-            </div>
+/* --- ГЕРОЙ БЛОК (БАННЕР) --- */
+.hero-wrapper { padding: 0 20px; }
+.hero {
+    max-width: 1600px;
+    min-height: 500px;
+    margin: 20px auto;
+    background: #ffd6e4;
+    border-radius: 40px;
+    padding: 60px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
 
-            <h3 id="label-categories">Категории</h3>
-            <ul class="filter-list" style="margin-bottom: 20px;">
-                <li><label><input type="checkbox" id="hits-filter"><span id="f-hits">Хиты продаж</span></label></li>
-            </ul>
+.hero-text { position: relative; z-index: 2; max-width: 600px; }
+.hero-text h1 { font-size: 60px; line-height: 1; margin-bottom: 20px; }
 
-            <h3 id="label-composition">Цветы в составе</h3>
-            <ul class="filter-list">
-                <li><label><input type="checkbox" class="filter-check" value="розы"> <span id="f-roze">Розы</span></label></li>
-                <li><label><input type="checkbox" class="filter-check" value="кустовые"> <span id="f-kust">Кустовые розы</span></label></li>
-                <li><label><input type="checkbox" class="filter-check" value="пионовидные"> <span id="f-pion">Пионовидные розы</span></label></li>
-                <li><label><input type="checkbox" class="filter-check" value="гортензии"> <span id="f-gort">Гортензии</span></label></li>
-                <li><label><input type="checkbox" class="filter-check" value="хризантемы"> <span id="f-hriz">Хризантемы</span></label></li>
-                <li><label><input type="checkbox" class="filter-check" value="голландские"> <span id="f-goll">Голландские розы</span></label></li>
-                <li><label><input type="checkbox" class="filter-check" value="эвкалипт"> <span id="f-evka">Эвкалипт</span></label></li>
-                <li><label><input type="checkbox" class="filter-check" value="эустомы"> <span id="f-eust">Эустомы</span></label></li>
-                <li><label><input type="checkbox" class="filter-check" value="лилии"> <span id="f-lilii">Лилии</span></label></li>
-                <li><label><input type="checkbox" class="filter-check" value="диантус"> <span id="f-diant">Диантус</span></label></li>
-                <li><label><input type="checkbox" class="filter-check" value="гвоздика"> <span id="f-gvozd">Гвоздика</span></label></li>
-            </ul>
-        </aside>
+.hero-image {
+    width: 600px;
+    position: absolute;
+    right: -50px;
+    bottom: -50px;
+    z-index: 1;
+}
 
-        <div class="products-grid" id="catalogGrid"></div>
+/* --- КАТАЛОГ --- */
+.catalog-header h1 {
+    background-color: var(--light-pink);
+    color: var(--pink);
+    padding: 15px;
+    border-radius: 40px;
+    font-size: 24px;
+    margin: 30px auto;
+    text-align: center;
+    max-width: 90%;
+}
 
-        <div class="side-banner">
-            <span id="side-text">ДАРИТЕ РАДОСТЬ БЛИЗКИМ</span>
-        </div>
-    </div>
+.layout {
+    display: flex;
+    padding: 0 5%;
+    gap: 30px;
+}
 
-<script>
-    let currentLang = 'ru';
-    const translations = {
-        ru: { slogan: "ПЕРВЫЙ ЦИФРОВОЙ ЦВЕТОЧНЫЙ МАГАЗИН В КАЗАХСТАНЕ", navHome: "ГЛАВНАЯ", navCatalog: "КАТАЛОГ", navAbout: "О КОМПАНИИ", pageTitle: "ГОТОВЫЕ БУКЕТЫ", labelPrice: "Цена", labelComp: "Цветы в составе", labelCategories: "Категории", fHits: "Хиты продаж", fRoze: "Розы", fKust: "Кустовые розы", fPion: "Пионовидные розы", fGort: "Гортензии", fHriz: "Хризантемы", fGoll: "Голландские розы", fEvka: "Эвкалипт", fEust: "Эустомы", fLilii: "Лилии", fDiant: "Диантус", fGvozd: "Гвоздика", sideText: "ДАРИТЕ РАДОСТЬ БЛИЗКИМ", langBtn: "КАЗ", cities: { astana: "АСТАНА", almaty: "АЛМАТЫ" }, flowers: { "НЕЖНОСТЬ": "НЕЖНОСТЬ", "ПИОНОВИДНОЕ СЧАСТЬЕ": "ПИОНОВИДНОЕ СЧАСТЬЕ", "ИЗЫСКАННАЯ НЕЖНОСТЬ": "ИЗЫСКАННАЯ НЕЖНОСТЬ", "КОРЗИНКА РАДОСТИ": "КОРЗИНКА РАДОСТИ", "КОНТРАСТ ЧУВСТВ": "КОНТРАСТ ЧУВСТВ", "ОБЛАКО ЛЮБВИ": "ОБЛАКО ЛЮБВИ", "Букет Императрица": "Букет Императрица", "Букет Микс": "Букет Микс", "Сердце голландии": "Сердце голландии", "Букет из Хризантем": "Букет из Хризантем", "Белоснежка": "Белоснежка", "15 Хризантем": "15 Хризантем", "Элегантная Сдержанность": "Элегантная Сдержанность", "Нежное признание": "Нежное признание", "Момент вдохновения": "Момент вдохновения" } },
-        kaz: { slogan: "ҚАЗАҚСТАНДАҒЫ ЕҢ АЛҒАШҚЫ ЦИФРЛАНДЫРЫЛҒАН ГҮЛ ДҮКЕНІ", navHome: "БАСТЫ БЕТ", navCatalog: "КАТАЛОГ", navAbout: "КОМПАНИЯ ТУРАЛЫ", pageTitle: "ДАЙЫН БУКЕТТЕР", labelPrice: "Бағасы", labelComp: "Гүлдер құрамы", labelCategories: "Санаттар", fHits: "Хит сатылымдар", fRoze: "Розалар", fKust: "Бұталы розалар", fPion: "Шаршыгүл розалары", fGort: "Гортензиялар", fHriz: "Хризантемалар", fGoll: "Голланд розалары", fEvka: "Эвкалипт", fEust: "Эустомалар", fLilii: "Лилиялар", fDiant: "Диантус", fGvozd: "Қалампыр", sideText: "ЖАҚЫНДАРЫҢЫЗҒА ҚУАНЫШ СЫЙЛАҢЫЗ", langBtn: "РУС", cities: { astana: "АСТАНА", almaty: "АЛМАТЫ" }, flowers: { "НЕЖНОСТЬ": "НӘЗІКТІК", "ПИОНОВИДНОЕ СЧАСТЬЕ": "ШАРШЫГҮЛ БАҚЫТЫ", "ИЗЫСКАННАЯ НЕЖНОСТЬ": "КЕРЕМЕТ НӘЗІКТІК", "КОРЗИНКА РАДОСТИ": "ҚУАНЫШ СЕБЕТІ", "КОНТРАСТ ЧУВСТВ": "СЕЗІМ КОНТРАСТЫ", "ОБЛАКО ЛЮБВИ": "МАХАББАТ БҰЛТЫ", "Букет Императрица": "Императрица букеті", "Букет Микс": "Микс букеті", "Сердце голландии": "Голландия жүрегі", "Букет из Хризантем": "Хризантемалар букеті", "Белоснежка": "Ақшақар", "15 Хризантем": "15 Хризантема", "Элегантная Сдержанность": "Элегантты ұстамдылық", "Нежное признание": "Нәзік мойындау", "Момент вдохновения": "Шабыт сәті" } }
-    };
+.sidebar { width: 200px; flex-shrink: 0; }
 
-    // ПОЛНЫЙ СПИСОК ТОВАРОВ (БЕЗ СОКРАЩЕНИЙ)
-    const flowerData = {
-        astana: [
-            { id: "НЕЖНОСТЬ", price: 150000, cat: "пионовидные кустовые розы", img: "images/Букет%20%22Нежность%22.jpg" },
-            { id: "ПИОНОВИДНОЕ СЧАСТЬЕ", price: 40000, cat: "пионовидные кустовые розы", img: "images/Пионовидное%20счастье.jpg" },
-            { id: "ИЗЫСКАННАЯ НЕЖНОСТЬ", price: 70000, cat: "пионовидные кустовые розы", img: "images/Изысканная%20нежность.jpg" },
-            { id: "КОРЗИНКА РАДОСТИ", price: 40000, cat: "кустовые розы", img: "images/Корзинка%20радости.jpg" },
-            { id: "КОНТРАСТ ЧУВСТВ", price: 55000, cat: "гортензии кустовые розы", img: "images/Контраст%20чувств.jpg" },
-            { id: "ОБЛАКО ЛЮБВИ", price: 75000, cat: "гортензии пионовидные розы", img: "images/Облако%20любви.jpg" },
-            { id: "Букет Императрица", price: 82000, cat: "гортензии", img: "images/Букет%20Императрица.jpg" },
-            { id: "Букет Микс", price: 121000, cat: "голландские розы", img: "images/Букет%20Микс.jpg" },
-            { id: "Сердце голландии", price: 23000, cat: "ранункулюсы", img: "images/Сердце%20голландии.jpg" },
-            { id: "Букет из Хризантем", price: 34000, cat: "хризантемы", img: "images/Букет%20из%20Хризантем.jpg" },
-            { id: "Белоснежка", price: 24000, cat: "хризантемы", img: "images/Белоснежка.jpg" },
-            { id: "15 Хризантем", price: 32000, cat: "хризантемы", img: "images/15%20Хризантем.jpg" },
-            { id: "Элегантная Сдержанность", price: 124000, cat: "кустовые розы", img: "images/Элегантная%20Сдержанность.jpg" },
-            { id: "Нежное признание", price: 66000, cat: "эвкалипт кустовые розы эустомы", img: "images/Нежное%20признание.jpg" },
-            { id: "Момент вдохновения", price: 32000, cat: "эвкалипт розы гвоздика", img: "images/Момент%20вдохновения.jpg" }
-        ]
-    };
-    flowerData.almaty = [...flowerData.astana];
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    flex-grow: 1;
+}
 
-    function toggleLanguage() { currentLang = (currentLang === 'ru') ? 'kaz' : 'ru'; applyTranslations(); render(); }
-    function applyTranslations() {
-        const t = translations[currentLang];
-        document.getElementById('header-slogan').textContent = t.slogan;
-        document.getElementById('nav-home').textContent = t.navHome;
-        document.getElementById('nav-catalog').textContent = t.navCatalog;
-        document.getElementById('nav-about').textContent = t.navAbout;
-        document.getElementById('page-title').textContent = t.pageTitle;
-        document.getElementById('label-price').textContent = t.labelPrice;
-        document.getElementById('label-composition').textContent = t.labelComp;
-        document.getElementById('label-categories').textContent = t.labelCategories;
-        document.getElementById('f-hits').textContent = t.fHits;
-        document.getElementById('f-roze').textContent = t.fRoze;
-        document.getElementById('f-kust').textContent = t.fKust;
-        document.getElementById('f-pion').textContent = t.fPion;
-        document.getElementById('f-gort').textContent = t.fGort;
-        document.getElementById('f-hriz').textContent = t.fHriz;
-        document.getElementById('f-goll').textContent = t.fGoll;
-        document.getElementById('f-evka').textContent = t.fEvka;
-        document.getElementById('f-eust').textContent = t.fEust;
-        document.getElementById('f-lilii').textContent = t.fLilii;
-        document.getElementById('f-diant').textContent = t.fDiant;
-        document.getElementById('f-gvozd').textContent = t.fGvozd;
-        document.getElementById('side-text').textContent = t.sideText;
-        document.getElementById('langBtn').textContent = t.langBtn;
-        document.getElementById('opt-astana').textContent = t.cities.astana;
-        document.getElementById('opt-almaty').textContent = t.cities.almaty;
+.product-card { text-decoration: none; color: inherit; text-align: center; }
+.product-card img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+/* --- МОБИЛЬНАЯ АДАПТАЦИЯ (ГЛАВНЫЕ ИСПРАВЛЕНИЯ ТУТ) --- */
+@media screen and (max-width: 768px) {
+    
+    /* Исправляем шапку: Лого и слоган сверху, кнопки снизу */
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 20px;
+        gap: 15px;
     }
 
-    function slideOne() { render(); document.getElementById("range1").textContent = document.getElementById("slider-1").value; }
-    function slideTwo() { render(); document.getElementById("range2").textContent = document.getElementById("slider-2").value; }
-
-    function render() {
-        const city = document.getElementById('citySelect').value;
-        const grid = document.getElementById('catalogGrid');
-        const minP = parseInt(document.getElementById('slider-1').value);
-        const maxP = parseInt(document.getElementById('slider-2').value);
-        const activeFilters = Array.from(document.querySelectorAll('.filter-check:checked')).map(c => c.value.toLowerCase());
-        const isHitOnly = document.getElementById('hits-filter').checked;
-
-        const hitsList = ["НЕЖНОСТЬ", "ИЗЫСКАННАЯ НЕЖНОСТЬ"];
-        const filtered = flowerData[city].filter(f => {
-            const matchesPrice = f.price >= minP && f.price <= maxP;
-            const matchesCat = activeFilters.length === 0 || activeFilters.some(filter => f.cat.toLowerCase().includes(filter));
-            const matchesHit = isHitOnly ? hitsList.includes(f.id) : true;
-            return matchesPrice && matchesCat && matchesHit;
-        });
-
-        grid.innerHTML = filtered.map(f => `
-            <div class="product-card">
-                <img src="${f.img}" alt="${f.id}" loading="lazy">
-                <div class="product-name">${translations[currentLang].flowers[f.id] || f.id}</div>
-                <div class="product-price">${f.price.toLocaleString()} ₸</div>
-            </div>
-        `).join('');
+    .header-left {
+        width: 100%;
+        gap: 10px;
     }
 
-    document.getElementById('citySelect').addEventListener('change', render);
-    document.getElementById('hits-filter').addEventListener('change', render);
-    document.querySelectorAll('.filter-check').forEach(ch => ch.addEventListener('change', render));
-    window.onload = () => { applyTranslations(); render(); };
-</script>
-</body>
-</html>
+    .logo { height: 45px; }
+
+    .slogan {
+        font-size: 10px;
+        max-width: 160px;
+    }
+
+    /* Кнопки выстраиваем в ровный ряд */
+    .header-right-nav {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap; /* Если не влезут, перенесутся */
+        gap: 8px;
+    }
+
+    .nav-btn, .city-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+
+    /* Увеличиваем товары: теперь 2 в ряд */
+    .layout { flex-direction: column; }
+    .sidebar { width: 100%; margin-bottom: 20px; }
+
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    /* Масштабируем баннер */
+    .hero {
+        padding: 30px 20px;
+        min-height: auto;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text h1 { font-size: 32px; }
+    
+    .hero-image {
+        position: static;
+        width: 100%;
+        max-width: 280px;
+        margin-top: 20px;
+    }
+
+    .catalog-header h1 {
+        font-size: 18px;
+        padding: 10px;
+    }
+}
+
+/* Совсем маленькие экраны */
+@media screen and (max-width: 480px) {
+    .header-right-nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Кнопки по 2 в ряд */
+    }
+    
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr); /* Оставляем 2 в ряд, чтобы не было мелко */
+    }
+}
